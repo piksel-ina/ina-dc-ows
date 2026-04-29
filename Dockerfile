@@ -28,7 +28,7 @@ RUN uv venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Copy requirements.txt
-COPY docker/ows/requirements.txt /app/requirements.txt
+COPY requirements.txt /app/requirements.txt
 
 # Install Python packages with UV
 RUN uv pip install --no-cache -r requirements.txt
@@ -57,18 +57,18 @@ ENV GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR" \
     GDAL_HTTP_MAX_RETRY="10" \
     GDAL_HTTP_RETRY_DELAY="1"
 
-# Copy datacube configuration template to root's home
-COPY datacube.conf.template /root/.datacube.conf.template
+# Copy datacube configuration to root's home
+COPY datacube.conf /root/.datacube.conf
 
 # Create user 'ows'
 RUN useradd -m -s /bin/bash ows
 
-# Copy template to ows's home and set permissions
-COPY datacube.conf.template /home/ows/.datacube.conf.template
-RUN chown ows:ows /home/ows/.datacube.conf.template
+# Copy datacube configuration to ows's home and set permissions
+COPY datacube.conf /home/ows/.datacube.conf
+RUN chown ows:ows /home/ows/.datacube.conf
 
 # Copy OWS configuration into the image
-COPY docker/ows/ows_config /env/config/ows_config
+COPY ows_config /env/config/ows_config
 
 ENV PYTHONPATH=/env/config
 ENV DATACUBE_OWS_CFG=ows_config.ows_cfg.ows_cfg
@@ -76,7 +76,7 @@ ENV DATACUBE_OWS_CFG=ows_config.ows_cfg.ows_cfg
 RUN chown -R ows:ows /env/config
 
 # Copy entrypoint
-COPY docker/ows/entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 USER ows
