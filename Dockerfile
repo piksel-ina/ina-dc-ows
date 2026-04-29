@@ -1,73 +1,61 @@
-# Build stage
 ARG GDAL_VERSION=ubuntu-small-3.12.0
+
+# --- Builder stage ---
 FROM ghcr.io/osgeo/gdal:${GDAL_VERSION} AS builder
-WORKDIR /app
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    UV_PYTHON_DOWNLOADS=0
 
-# Install UV from Astral
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-# Install essential build dependencies
-RUN apt-get update && apt-get install -y \
-      git \
+RUN apt-get update && apt-get install -y --no-install-recommends \
       gcc \
       g++ \
       libpq-dev \
       libgeos-dev \
-      libhdf5-dev \
-      libnetcdf-dev \
       python3-dev \
       build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Create virtual environment with UV
-ENV VIRTUAL_ENV=/home/venv
-RUN uv venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+WORKDIR /app
 
-# Copy requirements.txt
-COPY requirements.txt /app/requirements.txt
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project --no-dev
 
-# Install Python packages with UV
-RUN uv pip install --no-cache -r requirements.txt
-
-# Runtime stage
+# --- Runtime stage ---
 FROM ghcr.io/osgeo/gdal:${GDAL_VERSION} AS runtime
+
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
-# Install runtime dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
       postgresql-client \
       gettext-base \
       curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy virtual environment from builder
-COPY --from=builder /home/venv /home/venv
-ENV PATH="/home/venv/bin:$PATH"
+COPY --from=builder /app/.venv /app/.venv
+ENV PATH="/app/.venv/bin:$PATH"
 
-# GDAL optimizations for OWS
 ENV GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR" \
     CPL_VSIL_CURL_ALLOWED_EXTENSIONS=".tif,.tiff" \
     GDAL_HTTP_MAX_RETRY="10" \
     GDAL_HTTP_RETRY_DELAY="1"
 
-# Copy datacube configuration to root's home
-COPY datacube.conf /root/.datacube.conf
+COPY datacube.conf /root/.datacube.conf.template
 
-# Create user 'ows'
 RUN useradd -m -s /bin/bash ows
 
-# Copy datacube configuration to ows's home and set permissions
-COPY datacube.conf /home/ows/.datacube.conf
-RUN chown ows:ows /home/ows/.datacube.conf
+COPY datacube.conf /home/ows/.datacube.conf.template
+RUN chown ows:ows /home/ows/.datacube.conf.template
 
-# Copy OWS configuration into the image
 COPY ows_config /env/config/ows_config
 
 ENV PYTHONPATH=/env/config
@@ -75,7 +63,6 @@ ENV DATACUBE_OWS_CFG=ows_config.ows_cfg.ows_cfg
 
 RUN chown -R ows:ows /env/config
 
-# Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
