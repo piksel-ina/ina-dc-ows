@@ -1,5 +1,5 @@
 """
-Sentinel-2 GeoMAD 14-band annual product configuration
+Sentinel-2 GeoMAD annual product configuration
 """
 from ...common.resource_limits import GEOMAD_S2_LIMIT
 from ..bands.s2_geomad_14band import S2_GEOMAD_14_BANDS_INFO, S2_GEOMAD_14_BANDS
@@ -12,11 +12,10 @@ from ..styles.s2_geomad_14band import (
 )
 
 s2_geomad_annual_layer = {
-    "title": "Annual GeoMAD 14-band (Sentinel-2)",
+    "title": "Annual GeoMAD (Sentinel-2)",
     "name": "s2_geomad_annual",
     "abstract": """
                 GeoMAD (Geometric Median Absolute Deviation) statistics over Indonesia
-                (full 14-band including nir08, red edge bands)
                 """,
     "product_name": "s2_geomad_annual",
 
@@ -30,6 +29,7 @@ s2_geomad_annual_layer = {
 
     "dynamic": False,
     "time_resolution": "summary",
+    "default_time": "latest",
 
     "image_processing": {
         "extent_mask_func": ["ows_config.common.band_utils.mask_by_emad_nan"],
