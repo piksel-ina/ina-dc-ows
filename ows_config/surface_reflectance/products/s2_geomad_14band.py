@@ -9,6 +9,15 @@ from ..styles.s2_geomad_14band import (
     S2_GEOMAD_14_REDEDGE,
     S2_GEOMAD_14_NDVI,
     S2_GEOMAD_14_NDVI_RE,
+    S2_GEOMAD_14_NDWI,
+    S2_GEOMAD_14_MNDWI,
+    S2_GEOMAD_14_NDBI,
+    S2_GEOMAD_14_NDMI,
+    S2_GEOMAD_14_BSI,
+    S2_GEOMAD_14_EMAD,
+    S2_GEOMAD_14_SMAD,
+    S2_GEOMAD_14_BCMAD,
+    S2_GEOMAD_14_COUNT,
 )
 
 s2_geomad_annual_layer = {
@@ -49,6 +58,15 @@ s2_geomad_annual_layer = {
             S2_GEOMAD_14_REDEDGE,
             S2_GEOMAD_14_NDVI,
             S2_GEOMAD_14_NDVI_RE,
+            S2_GEOMAD_14_NDWI,
+            S2_GEOMAD_14_MNDWI,
+            S2_GEOMAD_14_NDBI,
+            S2_GEOMAD_14_NDMI,
+            S2_GEOMAD_14_BSI,
+            S2_GEOMAD_14_EMAD,
+            S2_GEOMAD_14_SMAD,
+            S2_GEOMAD_14_BCMAD,
+            S2_GEOMAD_14_COUNT,
         ],
     },
 }
