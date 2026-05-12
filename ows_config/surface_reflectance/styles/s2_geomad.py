@@ -368,10 +368,10 @@ S2_GEOMAD_COUNT = {
     },
     "needed_bands": ["COUNT"],
     "mpl_ramp": "viridis",
-    "range": [0.0, 100.0],
+    "range": [0.0, 120.0],
     "legend": {
         "begin": 0,
-        "end": 100,
-        "ticks": [0, 25, 50, 75, 100],
+        "end": 120,
+        "ticks": [0, 20, 40, 60, 80, 100, 120],
     },
 }

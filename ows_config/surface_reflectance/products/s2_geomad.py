@@ -21,42 +21,52 @@ from ..styles.s2_geomad import (
     S2_GEOMAD_COUNT,
 )
 
-s2_geomad_annual_layer = {
-    "title": "Annual GeoMAD (Sentinel-2)",
-    "name": "s2_geomad_annual",
+_GEOMAD_BASE = {
     "abstract": """
-                GeoMAD (Geometric Median Absolute Deviation) statistics over Indonesia
+                GeoMAD (Geometric Median and Median Absolute Deviation) annual composite
+                over Indonesia, derived from Sentinel-2 surface reflectance.
                 """,
     "product_name": "s2_geomad_annual",
-
     "resource_limits": GEOMAD_S2_LIMIT,
-
     "bands": S2_GEOMAD_BANDS,
     "feature_info": {
         "include_utc_dates": True,
         "include_bands": S2_GEOMAD_BANDS_INFO,
     },
-
     "dynamic": False,
     "time_resolution": "summary",
     "default_time": "latest",
-
     "image_processing": {
         "extent_mask_func": ["ows_config.common.band_utils.mask_by_emad_nan"],
         "always_fetch_bands": ["EMAD"],
         "manual_merge": False,
         "apply_solar_corrections": False,
     },
-
     "native_crs": "EPSG:6933",
     "native_resolution": [10, -10],
+}
 
+s2_geomad_annual_spectral_layer = {
+    **_GEOMAD_BASE,
+    "title": "GeoMAD Annual - Spectral (Sentinel-2)",
+    "name": "s2_geomad_annual_spectral",
     "styling": {
         "default_style": "rgb",
         "styles": [
             S2_GEOMAD_RGB,
             S2_GEOMAD_FALSE_COLOR,
             S2_GEOMAD_REDEDGE,
+        ],
+    },
+}
+
+s2_geomad_annual_indices_layer = {
+    **_GEOMAD_BASE,
+    "title": "GeoMAD Annual - Spectral Indices (Sentinel-2)",
+    "name": "s2_geomad_annual_indices",
+    "styling": {
+        "default_style": "ndvi",
+        "styles": [
             S2_GEOMAD_NDVI,
             S2_GEOMAD_NDVI_RE,
             S2_GEOMAD_NDWI,
@@ -64,6 +74,17 @@ s2_geomad_annual_layer = {
             S2_GEOMAD_NDBI,
             S2_GEOMAD_NDMI,
             S2_GEOMAD_BSI,
+        ],
+    },
+}
+
+s2_geomad_annual_statistics_layer = {
+    **_GEOMAD_BASE,
+    "title": "GeoMAD Annual - Statistics (Sentinel-2)",
+    "name": "s2_geomad_annual_statistics",
+    "styling": {
+        "default_style": "log_emad",
+        "styles": [
             S2_GEOMAD_EMAD,
             S2_GEOMAD_SMAD,
             S2_GEOMAD_BCMAD,
