@@ -1,4 +1,4 @@
-S2_GEOMAD_14_BANDS_INFO = {
+S2_GEOMAD_BANDS_INFO = {
     "blue": "Blue (490 nm)",
     "green": "Green (560 nm)",
     "red": "Red (665 nm)",
@@ -15,7 +15,7 @@ S2_GEOMAD_14_BANDS_INFO = {
     "COUNT": "Number of observations in composite",
 }
 
-S2_GEOMAD_14_BANDS = {
+S2_GEOMAD_BANDS = {
     "blue": ["blue"],
     "green": ["green"],
     "red": ["red"],

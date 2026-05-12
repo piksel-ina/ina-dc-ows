@@ -1,8 +1,8 @@
 """
-Styles for Sentinel-2 GeoMAD 14-band annual product
+Styles for Sentinel-2 GeoMAD annual product
 """
 
-S2_GEOMAD_14_RGB = {
+S2_GEOMAD_RGB = {
     "name": "rgb",
     "title": "Geomedian - Red, Green, Blue",
     "abstract": "True-colour image, using the red, green and blue bands",
@@ -20,7 +20,7 @@ S2_GEOMAD_14_RGB = {
     ],
 }
 
-S2_GEOMAD_14_FALSE_COLOR = {
+S2_GEOMAD_FALSE_COLOR = {
     "name": "false_color_nir",
     "title": "False Colour - NIR, Red, Green",
     "abstract": "False-colour image using NIR, red and green bands for vegetation analysis",
@@ -38,7 +38,7 @@ S2_GEOMAD_14_FALSE_COLOR = {
     ],
 }
 
-S2_GEOMAD_14_REDEDGE = {
+S2_GEOMAD_REDEDGE = {
     "name": "false_color_rededge",
     "title": "False Colour - Red Edge, NIR, Red",
     "abstract": "False-colour composite using red edge 2, NIR and red bands",
@@ -56,7 +56,7 @@ S2_GEOMAD_14_REDEDGE = {
     ],
 }
 
-S2_GEOMAD_14_NDVI = {
+S2_GEOMAD_NDVI = {
     "name": "ndvi",
     "title": "NDVI - Red, NIR",
     "abstract": "Normalised Difference Vegetation Index",
@@ -87,7 +87,7 @@ S2_GEOMAD_14_NDVI = {
     },
 }
 
-S2_GEOMAD_14_NDVI_RE = {
+S2_GEOMAD_NDVI_RE = {
     "name": "ndvi_rededge",
     "title": "NDVI - Red Edge 1, NIR",
     "abstract": "Red Edge NDVI using red edge 1 and NIR narrow bands",
@@ -118,7 +118,7 @@ S2_GEOMAD_14_NDVI_RE = {
     },
 }
 
-S2_GEOMAD_14_NDWI = {
+S2_GEOMAD_NDWI = {
     "name": "ndwi",
     "title": "NDWI - Green, NIR",
     "abstract": "Normalised Difference Water Index for surface water detection",
@@ -144,7 +144,7 @@ S2_GEOMAD_14_NDWI = {
     },
 }
 
-S2_GEOMAD_14_MNDWI = {
+S2_GEOMAD_MNDWI = {
     "name": "mndwi",
     "title": "MNDWI - Green, SWIR",
     "abstract": "Modified Normalised Difference Water Index for improved water detection in built-up areas",
@@ -170,7 +170,7 @@ S2_GEOMAD_14_MNDWI = {
     },
 }
 
-S2_GEOMAD_14_NDBI = {
+S2_GEOMAD_NDBI = {
     "name": "ndbi",
     "title": "NDBI - SWIR, NIR",
     "abstract": "Normalised Difference Built-up Index for urban area detection",
@@ -196,7 +196,7 @@ S2_GEOMAD_14_NDBI = {
     },
 }
 
-S2_GEOMAD_14_NDMI = {
+S2_GEOMAD_NDMI = {
     "name": "ndmi",
     "title": "NDMI - NIR, SWIR",
     "abstract": "Normalised Difference Moisture Index for vegetation water content",
@@ -222,7 +222,7 @@ S2_GEOMAD_14_NDMI = {
     },
 }
 
-S2_GEOMAD_14_BSI = {
+S2_GEOMAD_BSI = {
     "name": "bsi",
     "title": "BSI - Bare Soil Index",
     "abstract": "Bare Soil Index using SWIR, Red, NIR and Blue bands for soil exposure detection",
@@ -248,67 +248,127 @@ S2_GEOMAD_14_BSI = {
     },
 }
 
-S2_GEOMAD_14_EMAD = {
-    "name": "emad",
-    "title": "EMAD - Euclidean MAD",
-    "abstract": "Euclidean Median Absolute Deviation - measures overall spectral change. Higher values indicate greater change from the geomedian.",
-    "components": {
-        "red": {"EMAD": 1.0},
-        "green": {"EMAD": 1.0},
-        "blue": {"EMAD": 1.0},
+_sdev_scaling = [0.020, 0.18]
+_edev_scaling = [6.2, 7.3]
+_bcdev_scaling = [0.025, 0.13]
+
+S2_GEOMAD_EMAD = {
+    "name": "log_emad",
+    "title": "EMAD - Euclidean MAD (log)",
+    "abstract": "Euclidean Median Absolute Deviation on a log scale. Measures overall spectral change; higher values indicate greater change from the geomedian.",
+    "index_function": {
+        "function": "datacube_ows.band_utils.single_band_offset_log",
+        "mapped_bands": True,
+        "kwargs": {
+            "band": "EMAD",
+            "scale_from": _edev_scaling,
+            "scale_to": [0.0, 4.0],
+        },
     },
-    "scale_range": [0.0, 0.05],
+    "needed_bands": ["EMAD"],
+    "mpl_ramp": "magma",
+    "range": [0.0, 4.0],
     "legend": {
         "begin": 0.0,
-        "end": 0.05,
-        "ticks": [0.0, 0.025, 0.05],
+        "end": 4.0,
+        "ticks": [0.0, 1.0, 2.0, 3.0, 4.0],
+        "tick_labels": {
+            "0.0": {"label": "Low"},
+            "4.0": {"label": "High"},
+        },
     },
 }
 
-S2_GEOMAD_14_SMAD = {
-    "name": "smad",
-    "title": "SMAD - Spectral MAD",
-    "abstract": "Spectral Median Absolute Deviation - measures spectral variability. Higher values indicate more spectral variation over the composite period.",
-    "components": {
-        "red": {"SMAD": 1.0},
-        "green": {"SMAD": 1.0},
-        "blue": {"SMAD": 1.0},
+S2_GEOMAD_SMAD = {
+    "name": "arcsec_smad",
+    "title": "SMAD - Spectral MAD (arcsec)",
+    "abstract": "Spectral Median Absolute Deviation on an arcsec scale. Measures spectral variability; higher values indicate more spectral variation over the composite period.",
+    "index_function": {
+        "function": "datacube_ows.band_utils.single_band_arcsec",
+        "mapped_bands": True,
+        "kwargs": {
+            "band": "SMAD",
+            "scale_from": _sdev_scaling,
+            "scale_to": [0.0, 4.0],
+        },
     },
-    "scale_range": [0.0, 0.05],
+    "needed_bands": ["SMAD"],
+    "mpl_ramp": "inferno",
+    "range": [0.0, 4.0],
     "legend": {
         "begin": 0.0,
-        "end": 0.05,
-        "ticks": [0.0, 0.025, 0.05],
+        "end": 4.0,
+        "ticks": [0.0, 1.0, 2.0, 3.0, 4.0],
+        "tick_labels": {
+            "0.0": {"label": "Low"},
+            "4.0": {"label": "High"},
+        },
     },
 }
 
-S2_GEOMAD_14_BCMAD = {
-    "name": "bcmad",
-    "title": "BCMAD - Bray-Curtis MAD",
-    "abstract": "Bray-Curtis Median Absolute Deviation - measures compositional change. Higher values indicate greater spectral dissimilarity.",
-    "components": {
-        "red": {"BCMAD": 1.0},
-        "green": {"BCMAD": 1.0},
-        "blue": {"BCMAD": 1.0},
+S2_GEOMAD_BCMAD = {
+    "name": "log_bcmad",
+    "title": "BCMAD - Bray-Curtis MAD (log)",
+    "abstract": "Bray-Curtis Median Absolute Deviation on a log scale. Measures compositional change; higher values indicate greater spectral dissimilarity.",
+    "index_function": {
+        "function": "datacube_ows.band_utils.single_band_offset_log",
+        "mapped_bands": True,
+        "kwargs": {
+            "band": "BCMAD",
+            "scale_from": _bcdev_scaling,
+            "scale_to": [0.0, 4.0],
+        },
     },
-    "scale_range": [0.0, 0.05],
+    "needed_bands": ["BCMAD"],
+    "mpl_ramp": "cividis",
+    "range": [0.0, 4.0],
     "legend": {
         "begin": 0.0,
-        "end": 0.05,
-        "ticks": [0.0, 0.025, 0.05],
+        "end": 4.0,
+        "ticks": [0.0, 1.0, 2.0, 3.0, 4.0],
+        "tick_labels": {
+            "0.0": {"label": "Low"},
+            "4.0": {"label": "High"},
+        },
     },
 }
 
-S2_GEOMAD_14_COUNT = {
+S2_GEOMAD_TERNARY_MAD = {
+    "name": "tmad_rgb",
+    "title": "MADs - SMAD, EMAD, BCMAD (RGB)",
+    "abstract": "Ternary MAD composite: SMAD in red, EMAD in green, BCMAD in blue. Useful for visualising combined change patterns.",
+    "components": {
+        "red": {
+            "function": "datacube_ows.band_utils.single_band_arcsec",
+            "mapped_bands": True,
+            "kwargs": {"band": "SMAD", "scale_from": _sdev_scaling},
+        },
+        "green": {
+            "function": "datacube_ows.band_utils.single_band_offset_log",
+            "mapped_bands": True,
+            "kwargs": {"band": "EMAD", "scale_from": _edev_scaling},
+        },
+        "blue": {
+            "function": "datacube_ows.band_utils.single_band_offset_log",
+            "mapped_bands": True,
+            "kwargs": {"band": "BCMAD", "scale_from": _bcdev_scaling},
+        },
+    },
+    "additional_bands": ["SMAD", "EMAD", "BCMAD"],
+}
+
+S2_GEOMAD_COUNT = {
     "name": "count",
     "title": "Observation Count",
     "abstract": "Number of clear observations used in the annual composite. Higher values indicate more cloud-free acquisitions.",
-    "components": {
-        "red": {"COUNT": 1.0},
-        "green": {"COUNT": 1.0},
-        "blue": {"COUNT": 1.0},
+    "index_function": {
+        "function": "datacube_ows.band_utils.single_band",
+        "mapped_bands": True,
+        "kwargs": {"band": "COUNT"},
     },
-    "scale_range": [0.0, 100.0],
+    "needed_bands": ["COUNT"],
+    "mpl_ramp": "viridis",
+    "range": [0.0, 100.0],
     "legend": {
         "begin": 0,
         "end": 100,
