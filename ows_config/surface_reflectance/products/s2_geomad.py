@@ -21,7 +21,7 @@ from ..styles.s2_geomad import (
     S2_GEOMAD_COUNT,
 )
 
-_GEOMAD_BASE = {
+_GEOMAD_COMMON = {
     "abstract": """
                 GeoMAD (Geometric Median and Median Absolute Deviation) annual composite
                 over Indonesia, derived from Sentinel-2 surface reflectance.
@@ -36,18 +36,32 @@ _GEOMAD_BASE = {
     "dynamic": False,
     "time_resolution": "summary",
     "default_time": "latest",
+    "native_crs": "EPSG:6933",
+    "native_resolution": [10, -10],
+}
+
+_GEOMAD_SPECTRAL_BASE = {
+    **_GEOMAD_COMMON,
+    "image_processing": {
+        "extent_mask_func": "datacube_ows.ogc_utils.mask_by_val",
+        "always_fetch_bands": [],
+        "manual_merge": False,
+        "apply_solar_corrections": False,
+    },
+}
+
+_GEOMAD_BASE = {
+    **_GEOMAD_COMMON,
     "image_processing": {
         "extent_mask_func": ["ows_config.common.band_utils.mask_by_emad_nan"],
         "always_fetch_bands": ["EMAD"],
         "manual_merge": False,
         "apply_solar_corrections": False,
     },
-    "native_crs": "EPSG:6933",
-    "native_resolution": [10, -10],
 }
 
 s2_geomad_annual_spectral_layer = {
-    **_GEOMAD_BASE,
+    **_GEOMAD_SPECTRAL_BASE,
     "title": "GeoMAD Annual - Spectral (Sentinel-2)",
     "name": "s2_geomad_annual_spectral",
     "styling": {
@@ -61,7 +75,7 @@ s2_geomad_annual_spectral_layer = {
 }
 
 s2_geomad_annual_indices_layer = {
-    **_GEOMAD_BASE,
+    **_GEOMAD_SPECTRAL_BASE,
     "title": "GeoMAD Annual - Spectral Indices (Sentinel-2)",
     "name": "s2_geomad_annual_indices",
     "styling": {
