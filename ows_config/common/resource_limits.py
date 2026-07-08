@@ -52,17 +52,19 @@ SENTINEL2_LIMITS = {
 
 
 GEOMAD_S2_CACHE_RULES = [
-    {
-        "min_datasets": 1,
-        "max_age": 60 * 60 * 24 * 7,
-    },
+    {"min_datasets": 5,  "max_age": 60 * 60 * 24 * 7},
+    {"min_datasets": 9,  "max_age": 60 * 60 * 24 * 30},
+    {"min_datasets": 17, "max_age": 60 * 60 * 24 * 90},
+    {"min_datasets": 65, "max_age": 60 * 60 * 24 * 180},
 ]
 
 GEOMAD_S2_LIMIT = {
     "wms": {
         "zoomed_out_fill_colour": [150, 180, 200, 160],
-        "min_zoom_factor": 10.0,
+        "min_zoom_factor": 30.0,
         "dataset_cache_rules": GEOMAD_S2_CACHE_RULES,
     },
-    "wcs": {},
+    "wcs": {
+        "max_datasets": 32,
+    },
 }

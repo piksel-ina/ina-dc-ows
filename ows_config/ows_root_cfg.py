@@ -72,7 +72,7 @@ services = {
 wms = {
     "max_width": 512,
     "max_height": 512,
-    "caps_cache_maxage": 60 * 60,
+    "caps_cache_maxage": 60 * 60 * 24,
 }
 
 wcs = {

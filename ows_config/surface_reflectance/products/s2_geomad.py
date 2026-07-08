@@ -34,7 +34,7 @@ _GEOMAD_COMMON = {
         "include_bands": S2_GEOMAD_BANDS_INFO,
     },
     "dynamic": False,
-    "time_resolution": "summary",
+    "time_resolution": "year",
     "default_time": "latest",
     "native_crs": "EPSG:6933",
     "native_resolution": [10, -10],
