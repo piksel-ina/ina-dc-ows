@@ -61,6 +61,8 @@ GEOMAD_S2_CACHE_RULES = [
 GEOMAD_S2_LIMIT = {
     "wms": {
         "zoomed_out_fill_colour": [150, 180, 200, 160],
+        "min_zoom_level": 8,
+        "max_datasets": 32,
         "min_zoom_factor": 30.0,
         "dataset_cache_rules": GEOMAD_S2_CACHE_RULES,
     },

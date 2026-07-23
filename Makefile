@@ -53,11 +53,12 @@ bash-ows: ## Open a shell in the OWS container
 .PHONY: init-schema init-layers init
 init-schema: ## Create OWS database schema (run once after DB init)
 	@echo "$(BLUE)Creating OWS schema...$(NC)"
-	$(DOCKER_COMPOSE) exec ows datacube-ows-update --schema --write-role
+	$(DOCKER_COMPOSE) exec ows datacube-ows-update --schema 
+# --write-role
 
 init-layers: ## Update materialised views for all layers
 	@echo "$(BLUE)Updating OWS layers...$(NC)"
-	$(DOCKER_COMPOSE) exec ows datacube-ows-update s2_l2a s2_geomad_annual_spectral s2_geomad_annual_120 s2_geomad_annual_indices s2_geomad_annual_statistics
+	$(DOCKER_COMPOSE) exec ows datacube-ows-update s2_l2a s2_geomad_annual_spectral s2_geomad_annual_indices s2_geomad_annual_statistics
 
 init: init-schema init-layers ## Full init: schema + layer updates
 

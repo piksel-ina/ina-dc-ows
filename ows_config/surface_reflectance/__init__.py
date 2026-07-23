@@ -7,7 +7,6 @@ from .products.s2_geomad import (
     s2_geomad_annual_spectral_layer,
     s2_geomad_annual_indices_layer,
     s2_geomad_annual_statistics_layer,
-    s2_geomad_annual_120_layer,
 )
 
 def get_surface_reflectance_layers():
@@ -17,7 +16,6 @@ def get_surface_reflectance_layers():
         s2_geomad_annual_spectral_layer,
         s2_geomad_annual_indices_layer,
         s2_geomad_annual_statistics_layer,
-        s2_geomad_annual_120_layer,
     ]
 
 __all__ = ['get_surface_reflectance_layers']
