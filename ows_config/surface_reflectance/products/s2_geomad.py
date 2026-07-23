@@ -27,7 +27,7 @@ _GEOMAD_COMMON = {
                 over Indonesia, derived from Sentinel-2 surface reflectance.
                 """,
     "product_name": "s2_geomad_annual",
-    "resource_limits": GEOMAD_S2_LIMIT,
+    # "resource_limits": GEOMAD_S2_LIMIT,
     "bands": S2_GEOMAD_BANDS,
     "feature_info": {
         "include_utc_dates": True,
@@ -64,6 +64,8 @@ s2_geomad_annual_spectral_layer = {
     **_GEOMAD_SPECTRAL_BASE,
     "title": "GeoMAD Annual - Spectral (Sentinel-2)",
     "name": "s2_geomad_annual_spectral",
+    "low_res_product_name": "s2_geomad_annual_120",
+    "resource_limits": GEOMAD_S2_SPECTRAL_LIMIT,
     "styling": {
         "default_style": "rgb",
         "styles": [
@@ -71,6 +73,21 @@ s2_geomad_annual_spectral_layer = {
             S2_GEOMAD_FALSE_COLOR,
             S2_GEOMAD_REDEDGE,
         ],
+    },
+}
+
+# Standalone low-resolution product layer for low_res_product_name fallback.
+s2_geomad_annual_120_layer = {
+    **_GEOMAD_SPECTRAL_BASE,
+    "title": "GeoMAD Annual - Low Resolution (Sentinel-2)",
+    "name": "s2_geomad_annual_120",
+    "abstract": "Low-resolution summary product used for zoomed-out requests.",
+    "product_name": "s2_geomad_annual_120",
+    # "resource_limits": GEOMAD_S2_LOWRES_LIMIT,
+    "native_resolution": [120, -120],
+    "styling": {
+        "default_style": "rgb",
+        "styles": [S2_GEOMAD_RGB],
     },
 }
 
