@@ -27,6 +27,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --locked --no-install-project --no-dev
 
+COPY docker-hotfixes /tmp/docker-hotfixes
+RUN python3 /tmp/docker-hotfixes/patch_datacube_ows_lowres.py
+
 # --- Runtime stage ---
 FROM ghcr.io/osgeo/gdal:${GDAL_VERSION} AS runtime
 
