@@ -1,4 +1,4 @@
-ARG GDAL_VERSION=ubuntu-small-3.12.0
+ARG GDAL_VERSION=ubuntu-small-3.13.0
 
 # --- Builder stage ---
 FROM ghcr.io/osgeo/gdal:${GDAL_VERSION} AS builder
@@ -10,7 +10,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+# git just needed for datacube-ows fork
 RUN apt-get update && apt-get install -y --no-install-recommends \
+      git \
       gcc \
       g++ \
       libpq-dev \
@@ -26,9 +28,6 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --locked --no-install-project --no-dev
-
-COPY docker-hotfixes /tmp/docker-hotfixes
-RUN python3 /tmp/docker-hotfixes/patch_datacube_ows_lowres.py
 
 # --- Runtime stage ---
 FROM ghcr.io/osgeo/gdal:${GDAL_VERSION} AS runtime
