@@ -1,16 +1,17 @@
 [project]
 name = "ina-dc-ows"
 version = "0.1.0"
-requires-python = ">=3.12"
+requires-python = "==3.14.*"
 dependencies = [
-    "datacube-ows[webserver]==1.9.13",
+    # "datacube-ows[webserver]==1.9.16",  # TODO: switch to this once 1.9.16 is released (1.9.15 lacks the low-res product fix)
+    "datacube-ows[webserver] @ git+https://github.com/opendatacube/datacube-ows.git@3744f5708de96a29ec0e0c6c0b2c5aa87e434fcc",
     "gunicorn",
     "psycopg2",
     "datacube==1.9.18",
     "Pillow",
     "rasterio",
     "netCDF4",
-    "gdal==3.12.0.post1",
+    "gdal==3.13.1",
 ]
 
 [dependency-groups]
@@ -24,3 +25,11 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["ows_config"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.uv]
+override-dependencies = [
+    "lxml>=6.0",
+]

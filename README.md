@@ -11,7 +11,11 @@ Requires a PostGIS database with ODC initialised and products indexed. For a qui
 
     make build
     make up
+    # Export env vars to connect to local ODC DB.
     make init
+    # ows workers cache layer ranges at boot; must restart to pick up
+    # data added/ranges updated by `make init` (or any later `datacube-ows-update` run).
+    make restart
 
 ## CI
 
