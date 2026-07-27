@@ -1,20 +1,23 @@
-ARG GDAL_VERSION=ubuntu-small-3.12.0
+ARG GDAL_VERSION=ubuntu-small-3.13.1
 
 # --- Builder stage ---
 FROM ghcr.io/osgeo/gdal:${GDAL_VERSION} AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive \
     UV_COMPILE_BYTECODE=1 \
-    UV_LINK_MODE=copy \
-    UV_PYTHON_DOWNLOADS=0
+    UV_LINK_MODE=copy
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+# TODO: Remove git install once datacube-ows can be pinned to v1.9.16.
 RUN apt-get update && apt-get install -y --no-install-recommends \
+      git \
       gcc \
       g++ \
       libpq-dev \
       libgeos-dev \
+      libxml2-dev \
+      libxslt1-dev \
       python3-dev \
       build-essential \
     && apt-get clean \

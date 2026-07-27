@@ -34,10 +34,11 @@ _GEOMAD_COMMON = {
         "include_bands": S2_GEOMAD_BANDS_INFO,
     },
     "dynamic": False,
-    "time_resolution": "year",
+    "time_resolution": "year", # TODO: Update "The 'year' time resolution type is deprecated.  Please use 'summary'."
     "default_time": "latest",
     "native_crs": "EPSG:6933",
     "native_resolution": [10, -10],
+    "low_res_product_name": "s2_geomad_annual_120",
 }
 
 _GEOMAD_SPECTRAL_BASE = {
