@@ -11,7 +11,9 @@ Earth observation data and derived products from Digital Earth Indonesia.
 service_keywords = [
     "digital earth",
     "digital earth indonesia",
-    "datacube ows"
+    "datacube ows",
+    "flood",
+    "banjir",
 ]
 
 contact_info = {
@@ -102,3 +104,4 @@ wcs = {
 
 # Feature flags
 ENABLE_SURFACE_REFLECTANCE = True
+ENABLE_FLOOD_HAZARD = True

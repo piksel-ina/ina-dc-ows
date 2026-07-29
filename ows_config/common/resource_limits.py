@@ -70,3 +70,23 @@ GEOMAD_S2_LIMIT = {
         "max_datasets": 32,
     },
 }
+
+# One dataset per layer over a single 2025 epoch, with a full overview pyramid,
+# so tiles are cheap to render at any zoom. Kept deliberately permissive: the
+# data is sparse floodplain corridors, and a zoomed-out placeholder blob would
+# misrepresent where hazard actually is.
+FLOOD_HAZARD_CACHE_RULES = [
+    {"min_datasets": 1, "max_age": 60 * 60 * 24 * 30},
+]
+
+FLOOD_HAZARD_LIMIT = {
+    "wms": {
+        "zoomed_out_fill_colour": [0, 0, 0, 0],
+        "min_zoom_factor": 1.0,
+        "max_datasets": 4,
+        "dataset_cache_rules": FLOOD_HAZARD_CACHE_RULES,
+    },
+    "wcs": {
+        "max_datasets": 4,
+    },
+}
