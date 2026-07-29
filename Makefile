@@ -58,7 +58,8 @@ init-schema: ## Create OWS database schema (run once after DB init)
 
 init-layers: ## Update materialised views for all layers
 	@echo "$(BLUE)Updating OWS layers...$(NC)"
-	$(DOCKER_COMPOSE) exec ows datacube-ows-update s2_l2a s2_geomad_annual_spectral s2_geomad_annual_indices s2_geomad_annual_statistics
+	$(DOCKER_COMPOSE) exec ows datacube-ows-update s2_l2a s2_geomad_annual_spectral s2_geomad_annual_indices s2_geomad_annual_statistics \
+	  flood_hazard_rp02 flood_hazard_rp05 flood_hazard_rp10 flood_hazard_rp25 flood_hazard_rp50
 
 init: init-schema init-layers ## Full init: schema + layer updates
 
