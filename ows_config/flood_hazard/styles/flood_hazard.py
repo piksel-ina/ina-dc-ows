@@ -31,26 +31,23 @@ FLOOD_HAZARD_CLASS = {
         "flood_hazard_class": [
             {
                 "title": "High",
-                "abstract": "High flood hazard",
                 "flags": {"hazard": "high"},
                 "color": _HAZARD_CLASS_COLOURS["high"],
             },
             {
                 "title": "Moderate",
-                "abstract": "Moderate flood hazard",
                 "flags": {"hazard": "moderate"},
                 "color": _HAZARD_CLASS_COLOURS["moderate"],
             },
             {
                 "title": "Low",
-                "abstract": "Low flood hazard",
                 "flags": {"hazard": "low"},
                 "color": _HAZARD_CLASS_COLOURS["low"],
             },
         ]
     },
     "legend": {
-        "width": 2.6,
+        "width": 2.0,
         "height": 1.1,
     },
 }
@@ -81,9 +78,9 @@ FLOOD_DEPTH = {
         {"value": 2.50, "color": "#041c3f"},
     ],
     "legend": {
-        "begin": 0.0,
-        "end": 2.5,
-        "ticks": [0.0, 0.25, 0.5, 1.0, 1.5, 2.0, 2.5],
+        "begin": "0.0",
+        "end": "2.5",
+        "ticks": ["0.0", "0.25", "0.5", "1.0", "1.5", "2.0", "2.5"],
         "units": "m",
         "title": "Flood depth",
     },
@@ -117,9 +114,11 @@ FLOOD_HAZARD_INDEX = {
         {"value": 0.90, "color": "#67001f"},
     ],
     "legend": {
-        "begin": 0.0,
-        "end": 0.9,
-        "ticks": [0.0, 0.05, 0.2, 0.55, 0.9],
+        # Strings, not floats: datacube-ows builds tick labels with Decimal(),
+        # and Decimal(0.05) expands to the full 50-digit binary value.
+        "begin": "0.0",
+        "end": "0.9",
+        "ticks": ["0.05", "0.2", "0.55", "0.9"],
         "title": "Hazard index",
     },
 }
