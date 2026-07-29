@@ -22,12 +22,31 @@ EXPECTED_LAYER_NAMES = {
     "s2_geomad_annual_spectral",
     "s2_geomad_annual_indices",
     "s2_geomad_annual_statistics",
+    "flood_hazard_rp02",
+    "flood_hazard_rp05",
+    "flood_hazard_rp10",
+    "flood_hazard_rp25",
+    "flood_hazard_rp50",
 }
 
 EXPECTED_PRODUCT_NAMES = {
     "s2_l2a",
     "s2_geomad_annual",
+    "flood_hazard_rp02",
+    "flood_hazard_rp05",
+    "flood_hazard_rp10",
+    "flood_hazard_rp25",
+    "flood_hazard_rp50",
 }
+
+
+def iter_named_layers(layers):
+    """Yield named layers, descending into folder layers."""
+    for layer in layers:
+        if "layers" in layer:
+            yield from iter_named_layers(layer["layers"])
+        else:
+            yield layer
 
 
 @pytest.fixture
@@ -35,6 +54,11 @@ def ows_cfg():
     from ows_config.ows_cfg import ows_cfg
 
     return ows_cfg
+
+
+@pytest.fixture
+def named_layers(ows_cfg):
+    return list(iter_named_layers(ows_cfg["layers"]))
 
 
 def test_ows_cfg_imports(ows_cfg):
@@ -51,34 +75,34 @@ def test_layers_is_list(ows_cfg):
     assert len(ows_cfg["layers"]) > 0
 
 
-def test_expected_layer_names(ows_cfg):
-    names = {layer["name"] for layer in ows_cfg["layers"]}
+def test_expected_layer_names(named_layers):
+    names = {layer["name"] for layer in named_layers}
     missing = EXPECTED_LAYER_NAMES - names
     assert not missing, f"Missing layers: {missing}"
 
 
-def test_no_extra_layer_names(ows_cfg):
-    names = {layer["name"] for layer in ows_cfg["layers"]}
+def test_no_extra_layer_names(named_layers):
+    names = {layer["name"] for layer in named_layers}
     extra = names - EXPECTED_LAYER_NAMES
     assert not extra, f"Unexpected layers: {extra}"
 
 
-def test_each_layer_has_required_keys(ows_cfg):
-    for layer in ows_cfg["layers"]:
+def test_each_layer_has_required_keys(named_layers):
+    for layer in named_layers:
         missing = REQUIRED_LAYER_KEYS - set(layer.keys())
         assert not missing, f"Layer '{layer.get('name', '?')}' missing keys: {missing}"
 
 
-def test_each_layer_styling_has_default_and_styles(ows_cfg):
-    for layer in ows_cfg["layers"]:
+def test_each_layer_styling_has_default_and_styles(named_layers):
+    for layer in named_layers:
         styling = layer["styling"]
         assert "default_style" in styling, f"Layer '{layer['name']}' missing default_style"
         assert "styles" in styling, f"Layer '{layer['name']}' missing styles"
         assert len(styling["styles"]) > 0, f"Layer '{layer['name']}' has no styles"
 
 
-def test_each_style_has_required_keys(ows_cfg):
-    for layer in ows_cfg["layers"]:
+def test_each_style_has_required_keys(named_layers):
+    for layer in named_layers:
         for style in layer["styling"]["styles"]:
             missing = REQUIRED_STYLE_KEYS - set(style.keys())
             assert not missing, (
@@ -86,8 +110,8 @@ def test_each_style_has_required_keys(ows_cfg):
             )
 
 
-def test_expected_product_names(ows_cfg):
-    products = {layer["product_name"] for layer in ows_cfg["layers"]}
+def test_expected_product_names(named_layers):
+    products = {layer["product_name"] for layer in named_layers}
     missing = EXPECTED_PRODUCT_NAMES - products
     assert not missing, f"Missing product names: {missing}"
 
