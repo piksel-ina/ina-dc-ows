@@ -3,9 +3,9 @@ Band definitions for the Flood Hazard (Bahaya Banjir 2025) products
 """
 
 FLOOD_HAZARD_BANDS_INFO = {
-    "flood_depth": "Flood depth (metres)",
-    "flood_hazard_index": "Flood hazard index (0-1, relative)",
-    "flood_hazard_class": "Flood hazard class (low / moderate / high)",
+    "flood_depth": "Kedalaman banjir (meter)",
+    "flood_hazard_index": "Indeks bahaya banjir (0–1)",
+    "flood_hazard_class": "Kelas bahaya banjir (rendah/sedang/tinggi)",
 }
 
 FLOOD_HAZARD_BANDS = {

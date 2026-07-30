@@ -7,7 +7,7 @@ Based on DEA Pacific configuration
 NDVI = {
     "name": "ndvi",
     "title": "NDVI - Red, NIR",
-    "abstract": "Normalised Difference Vegetation Index - a derived index that correlates well with the existence of vegetation",
+    "abstract": "Normalised Difference Vegetation Index, indeks yang menggambarkan keberadaan dan kerapatan vegetasi",
     "index_function": {
         "function": "datacube_ows.band_utils.norm_diff",
         "mapped_bands": True,
@@ -58,7 +58,7 @@ NDVI = {
 NDWI = {
     "name": "ndwi",
     "title": "NDWI - Green, NIR",
-    "abstract": "Normalized Difference Water Index - a derived index that correlates well with the existence of water",
+    "abstract": "Normalised Difference Water Index, indeks yang menggambarkan keberadaan air",
     "index_function": {
         "function": "datacube_ows.band_utils.norm_diff",
         "mapped_bands": True,
@@ -104,7 +104,7 @@ NDWI = {
 MNDWI = {
     "name": "mndwi",
     "title": "MNDWI - Green, SWIR",
-    "abstract": "Modified Normalised Difference Water Index - a derived index that correlates well with the existence of water (Xu 2006)",
+    "abstract": "Modified Normalised Difference Water Index, indeks yang menggambarkan keberadaan air (Xu 2006)",
     "index_function": {
         "function": "datacube_ows.band_utils.norm_diff",
         "mapped_bands": True,
@@ -131,7 +131,7 @@ MNDWI = {
 NDBI = {
     "name": "ndbi",
     "title": "NDBI - SWIR, NIR",
-    "abstract": "Normalised Difference Built-up Index - a derived index that correlates well with the existence of built-up areas",
+    "abstract": "Normalised Difference Built-up Index, indeks yang menggambarkan keberadaan kawasan terbangun",
     "index_function": {
         "function": "datacube_ows.band_utils.norm_diff",
         "mapped_bands": True,
@@ -158,7 +158,7 @@ NDBI = {
 NDMI = {
     "name": "ndmi",
     "title": "NDMI - NIR, SWIR",
-    "abstract": "Normalised Difference Moisture Index - a derived index that correlates well with the existence of water in leaves",
+    "abstract": "Normalised Difference Moisture Index, indeks yang menggambarkan kandungan air pada daun",
     "index_function": {
         "function": "datacube_ows.band_utils.norm_diff",
         "mapped_bands": True,

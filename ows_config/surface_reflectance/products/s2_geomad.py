@@ -23,8 +23,9 @@ from ..styles.s2_geomad import (
 
 _GEOMAD_COMMON = {
     "abstract": """
-                GeoMAD (Geometric Median and Median Absolute Deviation) annual composite
-                over Indonesia, derived from Sentinel-2 surface reflectance.
+                Komposit tahunan GeoMAD (Geometric Median and Median Absolute
+                Deviation) untuk wilayah Indonesia yang merupakan produk turunan
+                dari Sentinel-2 Surface Reflectance.
                 """,
     "product_name": "s2_geomad_annual",
     "resource_limits": GEOMAD_S2_LIMIT,
@@ -63,7 +64,7 @@ _GEOMAD_BASE = {
 
 s2_geomad_annual_spectral_layer = {
     **_GEOMAD_SPECTRAL_BASE,
-    "title": "GeoMAD Annual - Spectral (Sentinel-2)",
+    "title": "GeoMAD Tahunan - Band Spektral (Sentinel-2)",
     "name": "s2_geomad_annual_spectral",
     "styling": {
         "default_style": "rgb",
@@ -77,7 +78,7 @@ s2_geomad_annual_spectral_layer = {
 
 s2_geomad_annual_indices_layer = {
     **_GEOMAD_SPECTRAL_BASE,
-    "title": "GeoMAD Annual - Spectral Indices (Sentinel-2)",
+    "title": "GeoMAD Tahunan - Indeks Spektral (Sentinel-2)",
     "name": "s2_geomad_annual_indices",
     "styling": {
         "default_style": "ndvi",
@@ -95,7 +96,7 @@ s2_geomad_annual_indices_layer = {
 
 s2_geomad_annual_statistics_layer = {
     **_GEOMAD_BASE,
-    "title": "GeoMAD Annual - Statistics (Sentinel-2)",
+    "title": "GeoMAD Tahunan - Statistik (Sentinel-2)",
     "name": "s2_geomad_annual_statistics",
     "styling": {
         "default_style": "log_emad",

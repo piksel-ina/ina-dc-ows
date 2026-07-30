@@ -12,32 +12,30 @@ from ..bands.flood_hazard import FLOOD_HAZARD_BANDS, FLOOD_HAZARD_BANDS_INFO
 from ..styles.flood_hazard import FLOOD_HAZARD_STYLES
 
 _FLOOD_HAZARD_ABSTRACT = """
-Flood hazard for {label} ({aep} annual exceedance probability), derived from a
-Modified Geomorphic Flood Index over FABDEM v1.2 terrain with BMKG design
-rainfall. Single 2025 epoch.
+Bahaya banjir untuk {label} ({aep} AEP), diturunkan dari Modified Geomorphic
+Flood Index berbasis data model elevasi FABDEM v1.2 dan data curah hujan BMKG.
+Data satu periode, tahun 2025.
 
-Three measurements are available as styles: hazard class (low / moderate / high),
-modelled flood depth in metres, and the underlying relative hazard index. Hazard
-class is the authoritative interpretation and is the default view.
+Tersedia tiga informasi/layer, yaitu kelas bahaya (rendah/sedang/tinggi),
+kedalaman banjir hasil pemodelan dalam meter, dan indeks bahaya relatif.
 
-Coverage note: this is a prototype release covering selected regions of Java
-only, not the whole island. Areas outside the modelled regions carry no data
-rather than zero hazard.
+Cakupan: ini adalah rilis yang hanya mencakup beberapa wilayah di Pulau Jawa
+yang telah divalidasi pada tahun 2025.
 """
 
 # Return period -> (layer suffix, human label, annual exceedance probability)
 _RETURN_PERIODS = [
-    (2, "rp02", "a 1-in-2-year flood", "50%"),
-    (5, "rp05", "a 1-in-5-year flood", "20%"),
-    (10, "rp10", "a 1-in-10-year flood", "10%"),
-    (25, "rp25", "a 1-in-25-year flood", "4%"),
-    (50, "rp50", "a 1-in-50-year flood", "2%"),
+    (2, "rp02", "periode ulang 2 tahun", "50%"),
+    (5, "rp05", "periode ulang 5 tahun", "20%"),
+    (10, "rp10", "periode ulang 10 tahun", "10%"),
+    (25, "rp25", "periode ulang 25 tahun", "4%"),
+    (50, "rp50", "periode ulang 50 tahun", "2%"),
 ]
 
 
 def _build_layer(return_period, suffix, label, aep):
     return {
-        "title": f"Bahaya Banjir 2025 - {return_period} year return period ({aep} AEP)",
+        "title": f"Bahaya Banjir 2025 - Periode Ulang {return_period} Tahun ({aep} AEP)",
         "name": f"flood_hazard_{suffix}",
         "abstract": _FLOOD_HAZARD_ABSTRACT.format(label=label, aep=aep),
         "product_name": f"flood_hazard_{suffix}",
@@ -75,14 +73,22 @@ flood_hazard_layers = [
 ]
 
 flood_hazard_folder = {
-    "title": "Bahaya Banjir 2025 (Flood Hazard 2025)",
+    "title": "Bahaya Banjir 2025",
     "abstract": """
-                Flood hazard scenarios for Indonesia, 2025. Five return periods
-                (2, 5, 10, 25 and 50 years) are published as separate layers,
-                each offering hazard class, flood depth and hazard index.
-
-                Prototype release: selected regions of Java only.
+                Skenario bahaya banjir Indonesia yang diproduksi pada tahun 2025
+                dengan lima periode ulang (2, 5, 10, 25, dan 50 tahun). Setiap
+                periode ulang diterbitkan sebagai produk tersendiri yang
+                masing-masing menyediakan kelas bahaya, kedalaman banjir, dan
+                indeks bahaya.
                 """,
-    "keywords": ["flood", "banjir", "hazard", "bahaya", "inundation"],
+    "keywords": [
+        "banjir",
+        "flood",
+        "bahaya",
+        "hazard",
+        "genangan",
+        "inundation",
+        "periode ulang",
+    ],
     "layers": flood_hazard_layers,
 }

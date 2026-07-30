@@ -25,22 +25,22 @@ _HAZARD_CLASS_COLOURS = {
 
 FLOOD_HAZARD_CLASS = {
     "name": "hazard_class",
-    "title": "Flood Hazard Class",
-    "abstract": "Flood hazard classified as low, moderate or high.",
+    "title": "Kelas Bahaya Banjir",
+    "abstract": "Bahaya banjir yang diklasifikasikan menjadi rendah, sedang, atau tinggi.",
     "value_map": {
         "flood_hazard_class": [
             {
-                "title": "High",
+                "title": "Tinggi",
                 "flags": {"hazard": "high"},
                 "color": _HAZARD_CLASS_COLOURS["high"],
             },
             {
-                "title": "Moderate",
+                "title": "Sedang",
                 "flags": {"hazard": "moderate"},
                 "color": _HAZARD_CLASS_COLOURS["moderate"],
             },
             {
-                "title": "Low",
+                "title": "Rendah",
                 "flags": {"hazard": "low"},
                 "color": _HAZARD_CLASS_COLOURS["low"],
             },
@@ -54,9 +54,8 @@ FLOOD_HAZARD_CLASS = {
 
 FLOOD_DEPTH = {
     "name": "flood_depth",
-    "title": "Flood Depth (m)",
-    "abstract": "Modelled flood depth in metres. Scale is identical across all "
-                "return periods so depths can be compared between scenarios.",
+    "title": "Kedalaman Banjir (m)",
+    "abstract": "Kedalaman banjir hasil pemodelan dalam meter.",
     "needed_bands": ["flood_depth"],
     "index_function": {
         "function": "datacube_ows.band_utils.single_band",
@@ -82,17 +81,16 @@ FLOOD_DEPTH = {
         "end": "2.5",
         "ticks": ["0.0", "0.25", "0.5", "1.0", "1.5", "2.0", "2.5"],
         "units": "m",
-        "title": "Flood depth",
+        "title": "Kedalaman banjir",
     },
 }
 
 FLOOD_HAZARD_INDEX = {
     "name": "hazard_index",
-    "title": "Flood Hazard Index",
-    "abstract": "Relative flood hazard index, 0 to 1. Unitless -- it ranks "
-                "locations against each other rather than measuring a quantity. "
-                "Colour steps are closely spaced at the low end because most "
-                "values sit near zero.",
+    "title": "Indeks Bahaya Banjir",
+    "abstract": "Indeks bahaya banjir relatif dengan nilai 0 sampai 1, semakin "
+                "tinggi nilainya semakin besar bahayanya, sehingga dapat "
+                "digunakan untuk membandingkan tingkat bahaya antarlokasi.",
     "needed_bands": ["flood_hazard_index"],
     "index_function": {
         "function": "datacube_ows.band_utils.single_band",
@@ -119,7 +117,7 @@ FLOOD_HAZARD_INDEX = {
         "begin": "0.0",
         "end": "0.9",
         "ticks": ["0.05", "0.2", "0.55", "0.9"],
-        "title": "Hazard index",
+        "title": "Indeks bahaya",
     },
 }
 

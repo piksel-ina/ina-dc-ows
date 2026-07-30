@@ -10,16 +10,17 @@ from ..bands.sentinel2_bands import SENTINEL2_BANDS_INFO, SENTINEL2_BANDS
 s2_l2a_layer = {
     "title": "Sentinel-2 L2A Surface Reflectance",
     "abstract": """
-    This layer is generated from Sentinel-2 L2A Surface Reflectance data harvested from a Sentinel-2 STAC catalogue and indexed into the Open Data Cube. The web services (WMS/WCS/WMTS) are produced on-the-fly from the indexed datacube. Rendering may be slower for large requests or for areas not previously requested due to geographic constraints during data retrieval.
+    Data Sentinel-2 L2A Surface Reflectance yang dibaca langsung dari arsip publik Sentinel-2 di Oregon, Amerika Serikat, sehingga memerlukan waktu lebih lama untuk dimuat.
     """,
 
     "keywords": [
         "sentinel",
         "sentinel-2",
-        "setinel-2a",
-        "surface reflectance",
-        "s2_l2a",
         "sentinel 2",
+        "sentinel-2a",
+        "surface reflectance",
+        "reflektansi permukaan",
+        "s2_l2a",
     ],
 
     "name": "s2_l2a",

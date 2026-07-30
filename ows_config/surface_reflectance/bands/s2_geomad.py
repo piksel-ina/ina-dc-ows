@@ -12,7 +12,7 @@ S2_GEOMAD_BANDS_INFO = {
     "SMAD": "Spectral Median Absolute Deviation",
     "EMAD": "Euclidean Median Absolute Deviation",
     "BCMAD": "Bray Curtis Median Absolute Deviation",
-    "COUNT": "Number of observations in composite",
+    "COUNT": "Jumlah observasi dalam komposit",
 }
 
 S2_GEOMAD_BANDS = {

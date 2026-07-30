@@ -3,9 +3,9 @@
 Root OWS configuration - global settings
 """
 
-service_title = "DE Indonesia Web Services"
+service_title = "DE Indonesia (Piksel) Web Services"
 service_abstract = """
-Earth observation data and derived products from Digital Earth Indonesia.
+Data penginderaan jauh dan produk turunannya dari Digital Earth Indonesia (Piksel).
 """
 
 service_keywords = [
@@ -14,6 +14,11 @@ service_keywords = [
     "datacube ows",
     "flood",
     "banjir",
+    "penginderaan jauh",
+    "geospasial",
+    "bahaya banjir",
+    "indonesia",
+    "piksel",
 ]
 
 contact_info = {

@@ -18,7 +18,7 @@ SENTINEL2_BANDS_INFO = {
     "B12": "SWIR 2 (2190 nm)",
     "AOT": "Aerosol Optical Thickness",
     "WVP": "Scene Average Water Vapor",
-    "SCL": "Scene Classification Layer - Quality information"
+    "SCL": "Scene Classification Layer - Informasi kualitas"
 }
 
 SENTINEL2_BANDS = {
