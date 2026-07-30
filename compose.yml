@@ -14,6 +14,7 @@ services:
       - ODC_DEFAULT_DB_DATABASE=${ODC_DEFAULT_DB_DATABASE:-datacube}
       - ODC_DEFAULT_DB_USERNAME=${ODC_DEFAULT_DB_USERNAME:-datacube}
       - ODC_DEFAULT_DB_PASSWORD=${ODC_DEFAULT_DB_PASSWORD:-datacube}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-ap-southeast-3}
     develop:
       watch:
         - action: sync

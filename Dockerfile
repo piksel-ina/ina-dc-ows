@@ -50,7 +50,10 @@ ENV PATH="/app/.venv/bin:$PATH"
 ENV GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR" \
     CPL_VSIL_CURL_ALLOWED_EXTENSIONS=".tif,.tiff" \
     GDAL_HTTP_MAX_RETRY="10" \
-    GDAL_HTTP_RETRY_DELAY="1"
+    GDAL_HTTP_RETRY_DELAY="1" \
+    GDAL_CONFIG_FILE="/etc/gdal/gdal.conf"
+
+COPY gdal.conf /etc/gdal/gdal.conf
 
 COPY datacube.conf /root/.datacube.conf.template
 
