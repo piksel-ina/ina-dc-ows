@@ -27,6 +27,10 @@ EXPECTED_LAYER_NAMES = {
     "flood_hazard_rp10",
     "flood_hazard_rp25",
     "flood_hazard_rp50",
+    "ls5_c2l2_sr",
+    "ls7_c2l2_sr",
+    "ls8_c2l2_sr",
+    "ls9_c2l2_sr",
 }
 
 EXPECTED_PRODUCT_NAMES = {
@@ -37,6 +41,10 @@ EXPECTED_PRODUCT_NAMES = {
     "flood_hazard_rp10",
     "flood_hazard_rp25",
     "flood_hazard_rp50",
+    "ls5_c2l2_sr",
+    "ls7_c2l2_sr",
+    "ls8_c2l2_sr",
+    "ls9_c2l2_sr",
 }
 
 
