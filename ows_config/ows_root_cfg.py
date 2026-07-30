@@ -1,4 +1,3 @@
-# ows_root_cfg.py
 """
 Root OWS configuration - global settings
 """
@@ -34,8 +33,8 @@ contact_info = {
         "country": "Indonesia",
     },
     "email": "muhammad.taufik@big.go.id",
-    "telephone": "",  
-    "fax": ""         
+    "telephone": "",
+    "fax": ""
 }
 
 published_CRSs = {
@@ -60,15 +59,12 @@ published_CRSs = {
     }
 }
 
-allowed_urls = [ 
-    # "http://localhost:8000",
+allowed_urls = [
     "https://ows.staging.piksel.big.go.id",
     "https://ows-uncached.staging.piksel.big.go.id",
     "https://*.staging.piksel.big.go.id",
-
 ]
 
-# domain = "http://localhost:8000" 
 
 services = {
     "wms": True,
@@ -87,8 +83,8 @@ wcs = {
     "formats": {
         "GeoTIFF": {
             "renderers": {
-                "1": "datacube_ows.wcs1_utils.get_tiff", 
-                "2": "datacube_ows.wcs2_utils.get_tiff", 
+                "1": "datacube_ows.wcs1_utils.get_tiff",
+                "2": "datacube_ows.wcs2_utils.get_tiff",
             },
             "mime": "image/geotiff",
             "extension": "tif",
@@ -96,8 +92,8 @@ wcs = {
         },
         "netCDF": {
             "renderers": {
-                "1": "datacube_ows.wcs1_utils.get_netcdf", 
-                "2": "datacube_ows.wcs2_utils.get_netcdf", 
+                "1": "datacube_ows.wcs1_utils.get_netcdf",
+                "2": "datacube_ows.wcs2_utils.get_netcdf",
             },
             "mime": "application/x-netcdf",
             "extension": "nc",
@@ -107,6 +103,5 @@ wcs = {
     "native_format": "GeoTIFF",
 }
 
-# Feature flags
 ENABLE_SURFACE_REFLECTANCE = True
 ENABLE_FLOOD_HAZARD = True

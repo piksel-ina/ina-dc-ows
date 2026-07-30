@@ -3,7 +3,6 @@ Spectral index styles for Sentinel-2 Surface Reflectance
 Based on DEA Pacific configuration
 """
 
-# NDVI - Normalized Difference Vegetation Index
 NDVI = {
     "name": "ndvi",
     "title": "NDVI - Red, NIR",
@@ -54,7 +53,6 @@ NDVI = {
     ]
 }
 
-# NDWI - Normalized Difference Water Index
 NDWI = {
     "name": "ndwi",
     "title": "NDWI - Green, NIR",
@@ -100,7 +98,6 @@ NDWI = {
     ],
 }
 
-# MNDWI - Modified Normalized Difference Water Index
 MNDWI = {
     "name": "mndwi",
     "title": "MNDWI - Green, SWIR",
@@ -127,7 +124,6 @@ MNDWI = {
     }
 }
 
-# NDBI - Normalized Difference Built-up Index
 NDBI = {
     "name": "ndbi",
     "title": "NDBI - SWIR, NIR",
@@ -154,7 +150,6 @@ NDBI = {
     }
 }
 
-# NDMI - Normalized Difference Moisture Index
 NDMI = {
     "name": "ndmi",
     "title": "NDMI - NIR, SWIR",
@@ -181,7 +176,6 @@ NDMI = {
     }
 }
 
-# Export all index styles
 S2_INDEX_STYLES = [
     NDVI,
     NDWI,

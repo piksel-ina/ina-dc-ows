@@ -4,20 +4,18 @@ RGB-based styles for Sentinel-2 Surface Reflectance
 
 s2_range = [0.0, 3000.0]
 
-# True Color (Natural Color)
 TRUE_COLOR = {
     "name": "simple_rgb",
     "title": "True Color - RGB",
     "abstract": "Komposit true color menggunakan band red, green, dan blue",
     "components": {
-        "red": {"red": 1.0}, 
-        "green": {"green": 1.0}, 
+        "red": {"red": 1.0},
+        "green": {"green": 1.0},
         "blue": {"blue": 1.0}
     },
     "scale_range": s2_range
 }
 
-# False Color (Vegetation) - NIR, Red, Green
 FALSE_COLOR = {
     "name": "false_color",
     "title": "False Color - NIR, Red, Green",
@@ -30,7 +28,6 @@ FALSE_COLOR = {
     "scale_range": s2_range
 }
 
-# Infrared Green (SWIR, NIR, Green)
 INFRARED_GREEN = {
     "name": "infrared_green",
     "title": "False Color - SWIR, NIR, Green",
@@ -43,7 +40,6 @@ INFRARED_GREEN = {
     "scale_range": s2_range
 }
 
-# Agriculture (SWIR-NIR-Blue)
 AGRICULTURE = {
     "name": "agriculture",
     "title": "Agriculture - SWIR, NIR, Blue",
@@ -56,7 +52,6 @@ AGRICULTURE = {
     "scale_range": s2_range
 }
 
-# Atmospheric Penetration (SWIR-SWIR-Red)
 ATMOSPHERIC_PENETRATION = {
     "name": "atmospheric_penetration",
     "title": "Atmospheric Penetration - SWIR2, SWIR1, Red",
@@ -69,7 +64,6 @@ ATMOSPHERIC_PENETRATION = {
     "scale_range": s2_range
 }
 
-# Single band styles
 BLUE_BAND = {
     "name": "blue",
     "title": "Blue - 490nm",
@@ -142,7 +136,6 @@ SWIR2_BAND = {
     "scale_range": s2_range
 }
 
-# Sentinel-2 specific: Red Edge bands
 RED_EDGE_1 = {
     "name": "red_edge_1",
     "title": "Red Edge 1 - 705nm",
@@ -179,7 +172,6 @@ RED_EDGE_3 = {
     "scale_range": s2_range
 }
 
-# Export all RGB styles
 S2_RGB_STYLES = [
     TRUE_COLOR,
     FALSE_COLOR,

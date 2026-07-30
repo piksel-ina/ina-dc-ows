@@ -2,7 +2,6 @@
 Sentinel-2 band definitions and metadata
 """
 
-# Sentinel-2 band information for feature info
 SENTINEL2_BANDS_INFO = {
     "B01": "Coastal aerosol (443 nm)",
     "B02": "Blue (490 nm)",

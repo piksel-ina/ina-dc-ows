@@ -1,10 +1,8 @@
 """
 Flood Hazard (Bahaya Banjir 2025) product configuration.
 
-Return period is modelled as one product per scenario rather than a time axis or
-an extra dimension, so each return period surfaces as its own named WMS layer.
-The five layers are grouped in a single folder so clients can present them as a
-scenario selector (TerriaMap ``modelDimensions``) rather than a time slider.
+One product per return period rather than a time axis, grouped in a folder so
+clients can present them as a scenario selector rather than a time slider.
 """
 
 from ...common.resource_limits import FLOOD_HAZARD_LIMIT
@@ -23,7 +21,6 @@ Cakupan: ini adalah rilis yang hanya mencakup beberapa wilayah di Pulau Jawa
 yang telah divalidasi pada tahun 2025.
 """
 
-# Return period -> (layer suffix, human label, annual exceedance probability)
 _RETURN_PERIODS = [
     (2, "rp02", "periode ulang 2 tahun", "50%"),
     (5, "rp05", "periode ulang 5 tahun", "20%"),
@@ -47,15 +44,11 @@ def _build_layer(return_period, suffix, label, aep):
         "native_crs": "EPSG:6933",
         "native_resolution": [30, -30],
         "image_processing": {
-            # Nodata is NaN in the float bands, so the usual mask_by_val
-            # comparison would pass it through (NaN != NaN is true).
             "extent_mask_func": ["ows_config.common.band_utils.mask_by_nan"],
             "always_fetch_bands": [],
             "manual_merge": False,
             "apply_solar_corrections": False,
         },
-        # All three measurements are returned on click regardless of the style in
-        # view, so one query answers "how deep, how hazardous, which class".
         "feature_info": {
             "include_utc_dates": False,
             "include_bands": FLOOD_HAZARD_BANDS_INFO,
