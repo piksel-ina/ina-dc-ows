@@ -48,6 +48,18 @@ SENTINEL2_LIMITS = {
     }
 }
 
+LANDSAT_LIMITS = {
+    "wms": {
+        "zoomed_out_fill_colour": [150, 180, 200, 160],
+        "min_zoom_factor": 35.0,
+        "max_datasets": 32,
+        "dataset_cache_rules": dataset_cache_rules,
+    },
+    "wcs": {
+        "max_datasets": 32,
+    },
+}
+
 GEOMAD_S2_CACHE_RULES = [
     {"min_datasets": 5,  "max_age": 60 * 60 * 24 * 7},
     {"min_datasets": 9,  "max_age": 60 * 60 * 24 * 30},

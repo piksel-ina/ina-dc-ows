@@ -4,7 +4,7 @@ from .legends import (
     hazard_class_value_map,
     hazard_index_color_ramp,
 )
-from .resource_limits import GEOMAD_S2_LIMIT, DEFAULT_LIMITS, SENTINEL2_LIMITS
+from .resource_limits import GEOMAD_S2_LIMIT, DEFAULT_LIMITS, SENTINEL2_LIMITS, LANDSAT_LIMITS
 
 __all__ = [
     'BNPB_HAZARD_CLASSES',
@@ -14,4 +14,5 @@ __all__ = [
     'GEOMAD_S2_LIMIT',
     'DEFAULT_LIMITS',
     'SENTINEL2_LIMITS',
+    'LANDSAT_LIMITS',
 ]
